@@ -20,6 +20,9 @@ with st.sidebar:
     st.write("It is made to easily identify and count the right and left insertions and connector names per sub number, giving us the ability to easily see the gap and be able to balance the number of insertions.")
     st.title("How to use:")
     st.write("Drag and drop the excel file of sub balancing raw data and the processed data will be automatically generated.")
+    st.title("Developer's Note:")
+    st.write("1. Make sure that the file extension is xlsx. If not, open the file and save as .xlsx")
+    st.write("2. Make sure that the columns "SubNo", "Wi_No", "Ins_L", "Ins_R", "ConnNo_L", "ConnNo_R" exist.")
 
 # App title
 st.title("Sub Balancing App")
