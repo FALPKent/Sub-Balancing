@@ -33,10 +33,10 @@ if raw_data is not None:
     raw_data2 = pd.read_excel(raw_data)
 
     # Ordering columns
-    raw_data3 = raw_data2[["Sub No", "Wire No", "Ins_L", "Ins_R", "Conn_Name_L", "Conn_Name_R"]]
+    raw_data3 = raw_data2[["SubNo", "Wi_No", "Ins_L", "Ins_R", "ConnNo_L", "ConnNo_R"]]
 
     # Group data by "Sub No"
-    grouped_data = raw_data3.groupby("Sub No")
+    grouped_data = raw_data3.groupby("SubNo")
 
     # Calculate grand total
     grand_total = len(raw_data3)
