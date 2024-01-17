@@ -52,11 +52,11 @@ if raw_data is not None:
         st.write(group_data)
 
     @st.cache
-    def convert_df(group_data):
+    def convert_df(grouped_data):
         # IMPORTANT: Cache the conversion to prevent computation on every rerun
-        return group_data.to_csv().encode('utf-8')
+        return grouped_data.to_csv().encode('utf-8')
         
-    csv = convert_df(group_data)
+    csv = convert_df(grouped_data)
         
     st.download_button(
         label="Download data as CSV",
