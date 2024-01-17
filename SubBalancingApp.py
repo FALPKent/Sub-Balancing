@@ -25,7 +25,7 @@ with st.sidebar:
 st.title("Sub Balancing App")
 
 # Upload excel file
-raw_data = st.file_uploader("Upload sub balancing data", type=["xlsx", "xls"])
+raw_data = st.file_uploader("Upload sub balancing data", type=["xlsx"])
 
 # Read and process uploaded excel file
 
