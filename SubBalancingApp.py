@@ -50,17 +50,3 @@ if raw_data is not None:
         percent_of_grand_total = (count_wire_no / grand_total) * 100
         st.subheader(f"Sub No: {sub_no} - Wire Count: {count_wire_no} ({percent_of_grand_total:.2f}% of Total Insertions)")
         st.write(group_data)
-
-    @st.cache
-    def convert_df(grouped_data):
-        # IMPORTANT: Cache the conversion to prevent computation on every rerun
-        return grouped_data.to_csv().encode('utf-8')
-        
-    csv = convert_df(grouped_data)
-        
-    st.download_button(
-        label="Download data as CSV",
-        data=csv,
-        file_name='Sub Balancing.csv',
-        mime='text/csv',
-    )
