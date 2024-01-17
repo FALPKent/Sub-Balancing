@@ -40,6 +40,8 @@ if raw_data is not None:
 
     # Group data by "Sub No"
     grouped_data = raw_data3.groupby("SubNo")
+    st.write("Grouped Data")
+    st.write("grouped_data")
 
     # Calculate grand total
     grand_total = len(raw_data3)
