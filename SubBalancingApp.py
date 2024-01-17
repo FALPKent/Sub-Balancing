@@ -52,8 +52,8 @@ if raw_data is not None:
 
 # Add a download button at the bottom
 if st.button("Download All Data"):
-    # Create an ExcelWriter object
-    excel_writer = pd.ExcelWriter("All_Data.xlsx", engine='xlsxwriter')
+    # Create an ExcelWriter object with 'openpyxl' engine
+    excel_writer = pd.ExcelWriter("All_Data.xlsx", engine='openpyxl')
 
     # Write each DataFrame to the Excel file on different sheets
     for sub_no, group_data in grouped_data:
