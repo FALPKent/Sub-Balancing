@@ -50,17 +50,17 @@ if raw_data is not None:
         st.subheader(f"Sub No: {sub_no} - Wire Count: {count_wire_no} ({percent_of_grand_total:.2f}% of Total Insertions)")
         st.write(group_data)
 
-        # Add a download button for each DataFrame
-        download_button = st.button(f"Download Sub No {sub_no} Data")
-        if download_button:
-            # Create an ExcelWriter object
-            excel_writer = pd.ExcelWriter(f"Sub_No_{sub_no}_Data.xlsx", engine='xlsxwriter')
+# Add a download button at the bottom
+if st.button("Download All Data"):
+    # Create an ExcelWriter object
+    excel_writer = pd.ExcelWriter("All_Data.xlsx", engine='xlsxwriter')
 
-            # Write the DataFrame to the Excel file on a sheet named 'Sub_No_{sub_no}'
-            group_data.to_excel(excel_writer, sheet_name=f'Sub_No_{sub_no}', index=False)
+    # Write each DataFrame to the Excel file on different sheets
+    for sub_no, group_data in grouped_data:
+        group_data.to_excel(excel_writer, sheet_name=f'Sub_No_{sub_no}', index=False)
 
-            # Save the Excel file
-            excel_writer.save()
+    # Save the Excel file
+    excel_writer.save()
 
-            # Provide a link to download the Excel file
-            st.markdown(f"[Download Sub No {sub_no} Data](Sub_No_{sub_no}_Data.xlsx)", unsafe_allow_html=True)
+    # Provide a link to download the Excel file
+    st.markdown("[Download All Data](All_Data.xlsx)", unsafe_allow_html=True)
