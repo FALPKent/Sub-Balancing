@@ -1,6 +1,8 @@
 # Import Libraries
 import streamlit as st
 import pandas as pd
+import xlsxwriter
+from io import BytesIO
 
 # Streamlit configurations
 st.set_page_config(page_title="Sub Balancing - ME App", layout="wide")
@@ -50,3 +52,20 @@ if raw_data is not None:
         percent_of_grand_total = (count_wire_no / grand_total) * 100
         st.subheader(f"Sub No: {sub_no} - Wire Count: {count_wire_no} ({percent_of_grand_total:.2f}% of Total Insertions)")
         st.write(group_data)
+
+        # Function to download excel file
+        def download_excel(df, file_name):
+          output = BytesIO()
+          writer = pd.ExcelWriter(output, engine='xlsxwriter')
+          df.to_excel(writer, index=False, sheet_name='Sub Balancing')
+          writer.save()
+          output.seek(0)
+          return output
+
+        # Create a download button
+        download_button = st.button("Download Sub Balancing File")
+
+        # When the button is clicked, save data to an excel fileand create a download link.
+        if download_button:
+          excel_file = download_excel(group_data, "Sub Balancing.xlsx")
+          st.download_button(label="Download Excel File", data=excel_file, file_name="Sub Balancing.xlsx", key="download_button")
