@@ -51,16 +51,16 @@ if raw_data is not None:
         st.subheader(f"Sub No: {sub_no} - Wire Count: {count_wire_no} ({percent_of_grand_total:.2f}% of Total Insertions)")
         st.write(group_data)
 
-        @st.cache
-        def convert_df(group_data):
-            # IMPORTANT: Cache the conversion to prevent computation on every rerun
-            return group_data.to_csv().encode('utf-8')
+    @st.cache
+    def convert_df(group_data):
+        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+        return group_data.to_csv().encode('utf-8')
         
-        csv = convert_df(group_data)
+    csv = convert_df(group_data)
         
-        st.download_button(
-            label="Download data as CSV",
-            data=csv,
-            file_name='Sub Balancing.csv',
-            mime='text/csv',
-        )
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='Sub Balancing.csv',
+        mime='text/csv',
+    )
