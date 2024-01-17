@@ -22,7 +22,7 @@ with st.sidebar:
     st.write("Drag and drop the excel file of sub balancing raw data and the processed data will be automatically generated.")
     st.title("Developer's Note:")
     st.write("1. Make sure that the file extension is xlsx. If not, open the file and save as .xlsx")
-    st.write("2. Make sure that the columns "SubNo", "Wi_No", "Ins_L", "Ins_R", "ConnNo_L", "ConnNo_R" exist.")
+    st.write("2. Make sure that the columns SubNo, Wi_No, Ins_L, Ins_R, ConnNo_L, ConnNo_R exist.")
 
 # App title
 st.title("Sub Balancing App")
