@@ -53,19 +53,16 @@ if raw_data is not None:
         st.subheader(f"Sub No: {sub_no} - Wire Count: {count_wire_no} ({percent_of_grand_total:.2f}% of Total Insertions)")
         st.write(group_data)
 
-        # Function to download excel file
-        def download_excel(df, file_name):
-          output = BytesIO()
-          writer = pd.ExcelWriter(output, engine='xlsxwriter')
-          df.to_excel(writer, index=False, sheet_name='Sub Balancing')
-          writer.save()
-          output.seek(0)
-          return output
-
-        # Create a download button
-        download_button = st.button("Download Sub Balancing File")
-
-        # When the button is clicked, save data to an excel fileand create a download link.
-        if download_button:
-          excel_file = download_excel(group_data, "Sub Balancing.xlsx")
-          st.download_button(label="Download Excel File", data=excel_file, file_name="Sub Balancing.xlsx", key="download_button")
+        @st.cache
+        def convert_df(group_data):
+            # IMPORTANT: Cache the conversion to prevent computation on every rerun
+            return group_data.to_csv().encode('utf-8')
+        
+        csv = convert_df(group_data)
+        
+        st.download_button(
+            label="Download data as CSV",
+            data=csv,
+            file_name='Sub Balancing.csv',
+            mime='text/csv',
+        )
