@@ -41,6 +41,20 @@ if raw_data is not None:
     # Group data by "Sub No"
     grouped_data = raw_data3.groupby("SubNo")
 
+    @st.cache
+    def convert_df(grouped_data):
+        # IMPORTANT: Cache the conversion to prevent computation on every rerun
+        return grouped_data.to_csv().encode('utf-8')
+    
+    csv = convert_df(my_large_df)
+    
+    st.download_button(
+        label="Download data as CSV",
+        data=csv,
+        file_name='Sub Balancing.csv',
+        mime='text/csv',
+    )
+
     # Calculate grand total
     grand_total = len(raw_data3)
 
