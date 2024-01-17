@@ -31,7 +31,6 @@ st.title("Sub Balancing App")
 raw_data = st.file_uploader("Upload sub balancing data", type=["xlsx"])
 
 # Read and process uploaded excel file
-
 if raw_data is not None:
     raw_data2 = pd.read_excel(raw_data)
 
@@ -50,3 +49,18 @@ if raw_data is not None:
         percent_of_grand_total = (count_wire_no / grand_total) * 100
         st.subheader(f"Sub No: {sub_no} - Wire Count: {count_wire_no} ({percent_of_grand_total:.2f}% of Total Insertions)")
         st.write(group_data)
+
+        # Add a download button for each DataFrame
+        download_button = st.button(f"Download Sub No {sub_no} Data")
+        if download_button:
+            # Create an ExcelWriter object
+            excel_writer = pd.ExcelWriter(f"Sub_No_{sub_no}_Data.xlsx", engine='xlsxwriter')
+
+            # Write the DataFrame to the Excel file on a sheet named 'Sub_No_{sub_no}'
+            group_data.to_excel(excel_writer, sheet_name=f'Sub_No_{sub_no}', index=False)
+
+            # Save the Excel file
+            excel_writer.save()
+
+            # Provide a link to download the Excel file
+            st.markdown(f"[Download Sub No {sub_no} Data](Sub_No_{sub_no}_Data.xlsx)", unsafe_allow_html=True)
